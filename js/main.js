@@ -57,7 +57,6 @@ const posts = [
 ];
 
 const container = document.getElementById('container');
-const idArray = []
 for(let i = 0; i < posts.length; i++){
     container.innerHTML += `<div class="post">
             <div class="post__header">
@@ -89,17 +88,20 @@ for(let i = 0; i < posts.length; i++){
                 </div> 
             </div>            
     </div>`
-    idArray.push(posts[i].likes)
-}
-console.log(idArray)
+    
 
-let buttons = document.querySelectorAll('a');
-console.log('buttons sono:', buttons);
-
-buttons.forEach(element => {
-    element.addEventListener("click", function(event) {
-       event.preventDefault(); 
-       element.classList.add('like-button--liked');
+    let buttons = document.querySelectorAll('a');
+    buttons.forEach(element => {
+        element.addEventListener("click", function(event) {
+            event.preventDefault(); 
+            element.classList.add('like-button--liked');
+            let clicked = element.dataset.postid
+            console.log(clicked)
+            let likecounter = parseInt(document.getElementById('like-counter-' + clicked).innerHTML);
+            let newcounter = likecounter + 1;
+            document.getElementById('like-counter-' + clicked).innerHTML = newcounter;
+            console.log(likecounter)
+        });
     });
-});
+}
 
